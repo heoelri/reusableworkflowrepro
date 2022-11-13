@@ -1,0 +1,29 @@
+name: 'Re-usable workflow'
+
+on: 
+  workflow_call:
+
+jobs:
+
+  produceOutputs:
+    name: 'Produce outputs'
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    outputs:
+      output1: ${{ steps.outputs.outputs.output1 }}
+      output2: ${{ steps.outputs.outputs.output2 }}
+
+    steps:
+
+    - name: 'Export outputs'
+      id: outputs
+      shell: pwsh
+      run: |
+        echo "output1=this is output 1 from toBeReused.yml" >> $GITHUB_OUTPUT
+        echo "output2=this is output 2 from toBeReused.yml" >> $GITHUB_OUTPUT
+         

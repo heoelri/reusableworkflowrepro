@@ -10,15 +10,13 @@ defaults:
 jobs:
   call-reusable-workflow:
     name: 'Call reusable workflow'
-    uses: ./.github/workflows/toBeReused.yaml
+    uses: ./.github/workflows/toBeReused.yml
     #secrets: inherit
   
   output-job:
     runs-on: ubuntu-latest
-    needs: deploy-global-infrastructure
+    needs: call-reusable-workflow
     steps:
      - run: |
-        echo ${{ needs.deploy-global-infrastructure }} 
-        echo ${{ needs.deploy-global-infrastructure.outputs }}
-        echo ${{ needs.deploy-global-infrastructure.outputs.AcrName }}
-        echo ${{ needs.deploy-global-infrastructure.outputs.AcrResourceGroup }}
+        echo ${{ needs.call-reusable-workflow.outputs.output1 }}
+        echo ${{ needs.call-reusable-workflow.outputs.output2 }}
