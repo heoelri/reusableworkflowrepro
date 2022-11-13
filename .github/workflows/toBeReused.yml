@@ -2,6 +2,11 @@ name: 'Re-usable workflow'
 
 on: 
   workflow_call:
+    outputs:
+      output1: 
+        value: ${{ jobs.produceOutputs.outputs.output1 }}
+      output2: 
+        value: ${{ jobs.produceOutputs.outputs.output2 }}
 
 jobs:
 
